@@ -21,6 +21,18 @@
         />
 
     <EditText
+        android:id="@+id/editLoginCad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite seu login"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        />
+
+    <EditText
         android:id="@+id/editEmailCad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,6 +44,16 @@
         android:padding="10dp"
         android:inputType="textEmailAddress"
         />
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        android:hint="Cargo"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/editSenhaCad"

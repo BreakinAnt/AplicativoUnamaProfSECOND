@@ -15,7 +15,7 @@ import com.koushikdutta.ion.Ion;
 
 public class MainCadastro extends AppCompatActivity {
 
-    private EditText editNomeCad, editEmailCad, editSenhaCad, editSenhaConf;
+    private EditText editNomeCad, editEmailCad, editSenhaCad, editSenhaConf, editLoginCad;
     private Button btnCadastrar;
     private String HOST = "http://bangadinhosbr2.000webhostapp.com/kinu_stuff/db/";
     String URL = HOST + "/cadastrar.php";
@@ -26,6 +26,7 @@ public class MainCadastro extends AppCompatActivity {
         setContentView(R.layout.activity_main_cadastro);
 
         editNomeCad = (EditText) findViewById(R.id.editNomeCad);
+        editLoginCad = (EditText) findViewById(R.id.editLoginCad);
         editEmailCad = (EditText) findViewById(R.id. editEmailCad);
         editSenhaCad = (EditText) findViewById(R.id.editSenhaCad);
         editSenhaConf = (EditText) findViewById(R.id.editSenhaConf);
@@ -36,19 +37,21 @@ public class MainCadastro extends AppCompatActivity {
             public void onClick(View v) {
 
                 String nome = editNomeCad.getText().toString();
+                String login = editLoginCad.getText().toString();
                 String email = editEmailCad.getText().toString();
                 String senha = editSenhaCad.getText().toString();
                 String confirma = editSenhaConf.getText().toString();
 
                 if(confirma.equals(senha)) {
 
-                  if(nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                  if(nome.isEmpty() || email.isEmpty() || senha.isEmpty() || login.isEmpty()) {
                       Toast.makeText(MainCadastro.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
                   } else {
                       Ion.with(MainCadastro.this)
                               .load(URL)
                               //enviando os dados do APP para o PHP
                               .setBodyParameter("nome_app", nome)
+                              .setBodyParameter("login_app", nome)
                               .setBodyParameter("email_app", email)
                               .setBodyParameter("senha_app", senha)
 

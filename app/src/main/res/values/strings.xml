@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AplicativoUnamaProfSECOND</string>
+    <string-array name="cargoList">
+        <item>Aluno</item>
+        <item>Professor</item>
+    </string-array>
 </resources>
