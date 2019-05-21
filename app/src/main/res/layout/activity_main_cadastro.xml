@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="50dp"
+    android:background="@color/background">
+
+    <EditText
+        android:id="@+id/editNomeCad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite seu nome"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        />
+
+    <EditText
+        android:id="@+id/editEmailCad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite seu e-mail"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
+        android:id="@+id/editSenhaCad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite sua Senha"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:inputType="textWebPassword"
+        />
+
+    <EditText
+        android:id="@+id/editSenhaConf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirme a senha"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:inputType="textWebPassword"
+        />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:text="Cadastrar"
+        android:textColor="#ffffff"
+        android:backgroundTint="#f78738"
+        android:layout_marginTop="20dp"
+
+        />
+
+
+
+
+</LinearLayout>
