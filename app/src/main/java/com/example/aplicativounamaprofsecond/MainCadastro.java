@@ -35,7 +35,7 @@ public class MainCadastro extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //d
+                //
                 String nome = editNomeCad.getText().toString();
                 String login = editLoginCad.getText().toString();
                 String email = editEmailCad.getText().toString();
