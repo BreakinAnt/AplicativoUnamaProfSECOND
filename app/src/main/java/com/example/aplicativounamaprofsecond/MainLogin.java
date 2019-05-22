@@ -15,7 +15,7 @@ import com.koushikdutta.ion.Ion;
 
 public class MainLogin extends AppCompatActivity {
 
-    private EditText editEmailLogar, editSenhaLogar;
+    private EditText editLoginLogar, editSenhaLogar;
     private Button btnEntrar, btnCadastrar;
     private TextView txtCadastro;
     private String HOST = "http://bangadinhosbr2.000webhostapp.com/kinu_stuff/db/";
@@ -25,7 +25,7 @@ public class MainLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editEmailLogar = (EditText) findViewById(R.id.editEmailLogar);
+        editLoginLogar = (EditText) findViewById(R.id.editLoginLogar);
         editSenhaLogar = (EditText) findViewById(R.id.editSenhaLogar);
         btnEntrar = (Button) findViewById(R.id.btnLogar);
         txtCadastro = (TextView)findViewById(R.id.txtCadastro);
@@ -42,17 +42,17 @@ public class MainLogin extends AppCompatActivity {
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  String email = editEmailLogar.getText().toString();
+                  String login = editLoginLogar.getText().toString();
                   String senha = editSenhaLogar.getText().toString();
 
-                if(email.isEmpty() || senha.isEmpty()) {
+                if(login.isEmpty() || senha.isEmpty()) {
                     Toast.makeText(MainLogin.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
                 } else {
                 Ion.with(MainLogin.this)
                         .load(URL)
                         //enviando os dados do APP para o PHP
 
-                        .setBodyParameter("email_app", email)
+                        .setBodyParameter("login_app", login)
                         .setBodyParameter("senha_app", senha)
 
                         .asJsonObject()
