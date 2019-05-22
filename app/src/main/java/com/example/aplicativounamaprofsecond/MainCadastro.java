@@ -44,14 +44,14 @@ public class MainCadastro extends AppCompatActivity {
 
                 if(confirma.equals(senha)) {
 
-                  if(nome.isEmpty() || email.isEmpty() || senha.isEmpty() || login.isEmpty()) {
+                  if(nome.isEmpty() || login.isEmpty() || email.isEmpty() || senha.isEmpty() ) {
                       Toast.makeText(MainCadastro.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
                   } else {
                       Ion.with(MainCadastro.this)
                               .load(URL)
                               //enviando os dados do APP para o PHP
                               .setBodyParameter("nome_app", nome)
-                              .setBodyParameter("login_app", nome)
+                              .setBodyParameter("login_app", login)
                               .setBodyParameter("email_app", email)
                               .setBodyParameter("senha_app", senha)
 
@@ -62,8 +62,10 @@ public class MainCadastro extends AppCompatActivity {
                                       try {
                                           String RETORNO = result.get("CADASTRO").getAsString();
 
-                                          if(RETORNO.equals("EMAIL_ERRO")) {
-                                              Toast.makeText(MainCadastro.this, "Email já está cadastrado", Toast.LENGTH_LONG).show();
+                                          if(RETORNO.equals("LOGIN_ERRO")) {
+                                              Toast.makeText(MainCadastro.this, "Login já está cadastrado", Toast.LENGTH_LONG).show();
+                                          } else if(RETORNO.equals("EMAIL_ERRO")) {
+                                              Toast.makeText(MainCadastro.this, "E-mail já está cadastrado", Toast.LENGTH_LONG).show();
                                           } else if(RETORNO.equals("SUCESSO")){
                                               Toast.makeText(MainCadastro.this, "Cadastrado com sucesso", Toast.LENGTH_LONG).show();
                                               Intent abrePrincipal = new Intent(MainCadastro.this, MainPrincipal.class);

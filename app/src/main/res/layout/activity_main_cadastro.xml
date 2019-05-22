@@ -18,6 +18,8 @@
         android:background="@android:color/white"
         android:layout_marginTop="10dp"
         android:padding="10dp"
+        android:inputType="textPersonName"
+        android:singleLine="true"
         />
 
     <EditText
@@ -30,6 +32,8 @@
         android:background="@android:color/white"
         android:layout_marginTop="10dp"
         android:padding="10dp"
+        android:inputType="textPersonName"
+        android:singleLine="true"
         />
 
     <EditText

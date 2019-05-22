@@ -12,11 +12,13 @@
         android:id="@+id/editEmailLogar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="E-mail"
+        android:hint="Login"
         android:textStyle="italic"
         android:layout_marginTop="150dp"
         android:background="@android:color/white"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:inputType="textPersonName"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/editSenhaLogar"
