@@ -1,8 +1,10 @@
 package com.example.aplicativounamaprofsecond;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +17,7 @@ import com.koushikdutta.ion.Ion;
 
 public class MainCadastro extends AppCompatActivity {
 
-    private EditText editNomeCad, editEmailCad, editSenhaCad, editSenhaConf, editLoginCad;
+    private EditText editNomeCad, editEmailCad, editSenhaCad, editSenhaConf, editLoginCad, editTurmaCad;
     private Button btnCadastrar;
     private String HOST = "http://bangadinhosbr2.000webhostapp.com/kinu_stuff/db/";
     String URL = HOST + "/cadastrar.php";
@@ -27,6 +29,7 @@ public class MainCadastro extends AppCompatActivity {
 
         editNomeCad = (EditText) findViewById(R.id.editNomeCad);
         editLoginCad = (EditText) findViewById(R.id.editLoginCad);
+        editTurmaCad = (EditText) findViewById(R.id.editTurmaCad);
         editEmailCad = (EditText) findViewById(R.id. editEmailCad);
         editSenhaCad = (EditText) findViewById(R.id.editSenhaCad);
         editSenhaConf = (EditText) findViewById(R.id.editSenhaConf);
@@ -36,15 +39,16 @@ public class MainCadastro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ///
-                String nome = editNomeCad.getText().toString();
-                String login = editLoginCad.getText().toString();
-                String email = editEmailCad.getText().toString();
+                final String nome = editNomeCad.getText().toString();
+                final String login = editLoginCad.getText().toString();
+                final String email = editEmailCad.getText().toString();
+                String turma = editTurmaCad.getText().toString();
                 String senha = editSenhaCad.getText().toString();
                 String confirma = editSenhaConf.getText().toString();
 
                 if(confirma.equals(senha)) {
 
-                  if(nome.isEmpty() || login.isEmpty() || email.isEmpty() || senha.isEmpty() ) {
+                  if(nome.isEmpty() || login.isEmpty() || turma.isEmpty() || email.isEmpty() || senha.isEmpty() ) {
                       Toast.makeText(MainCadastro.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
                   } else {
                       Ion.with(MainCadastro.this)
@@ -54,6 +58,7 @@ public class MainCadastro extends AppCompatActivity {
                               .setBodyParameter("login_app", login)
                               .setBodyParameter("email_app", email)
                               .setBodyParameter("senha_app", senha)
+                              .setBodyParameter("turma_app", senha)
 
                               .asJsonObject()
                               .setCallback(new FutureCallback<JsonObject>() {
@@ -68,6 +73,13 @@ public class MainCadastro extends AppCompatActivity {
                                               Toast.makeText(MainCadastro.this, "E-mail já está cadastrado", Toast.LENGTH_LONG).show();
                                           } else if(RETORNO.equals("SUCESSO")){
                                               Toast.makeText(MainCadastro.this, "Cadastrado com sucesso", Toast.LENGTH_LONG).show();
+
+                                              SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
+                                              pref.putString(encrypt("nome"), encrypt(nome));
+                                              pref.putString(encrypt("email"), encrypt(email));
+                                              pref.putString(encrypt("login"), encrypt(login));
+                                              pref.commit();
+
                                               Intent abrePrincipal = new Intent(MainCadastro.this, MainPrincipal.class);
                                               startActivity(abrePrincipal);
                                           } else {
@@ -86,6 +98,12 @@ public class MainCadastro extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    public String encrypt(String palavra) {
+
+        return Base64.encodeToString(palavra.getBytes(), Base64.DEFAULT);
 
     }
 

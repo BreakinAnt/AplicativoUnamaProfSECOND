@@ -1,8 +1,10 @@
 package com.example.aplicativounamaprofsecond;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,11 +21,24 @@ public class MainLogin extends AppCompatActivity {
     private Button btnEntrar, btnCadastrar;
     private TextView txtCadastro;
     private String HOST = "http://bangadinhosbr2.000webhostapp.com/kinu_stuff/db/";
-    String URL = HOST + "/logar.php";
+
+    public void verificaDados() {
+        SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+        String emailEncrypt = pref.getString(encrypt("email"), "");
+
+        String email = decrypt(emailEncrypt);
+
+        if (!email.isEmpty()) {
+            Intent abrePrincipal = new Intent(MainLogin.this, MainPrincipal.class);
+            startActivity(abrePrincipal);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        verificaDados();
 
         editLoginLogar = (EditText) findViewById(R.id.editLoginLogar);
         editSenhaLogar = (EditText) findViewById(R.id.editSenhaLogar);
@@ -44,6 +59,7 @@ public class MainLogin extends AppCompatActivity {
             public void onClick(View v) {
                   String login = editLoginLogar.getText().toString();
                   String senha = editSenhaLogar.getText().toString();
+                  String URL = HOST + "/logar.php";
 
                 if(login.isEmpty() || senha.isEmpty()) {
                     Toast.makeText(MainLogin.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
@@ -59,12 +75,26 @@ public class MainLogin extends AppCompatActivity {
                         .setCallback(new FutureCallback<JsonObject>() {
                             @Override
                             public void onCompleted(Exception e, JsonObject result) {
+
                                 try {
+
                                     String RETORNO = result.get("LOGIN").getAsString();
 
                                     if(RETORNO.equals("ERRO")) {
                                         Toast.makeText(MainLogin.this, "Login ou senha incorretos", Toast.LENGTH_LONG).show();
                                     } else if(RETORNO.equals("SUCESSO")){
+
+                                        String nome = result.get("NOME").getAsString();
+                                        String email = result.get("EMAIL").getAsString();
+
+
+                                        SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
+
+                                        pref.putString(encrypt("nome"), encrypt(nome));
+                                        pref.putString(encrypt("email"), encrypt(email));
+
+
+                                        pref.commit();
 
                                         Intent abrePrincipal = new Intent(MainLogin.this, MainPrincipal.class);
                                         startActivity(abrePrincipal);
@@ -87,6 +117,17 @@ public class MainLogin extends AppCompatActivity {
 });
 
 
+    }
+
+    public String encrypt(String palavra) {
+
+        return Base64.encodeToString(palavra.getBytes(), Base64.DEFAULT);
+
+    }
+
+    public String decrypt (String palavra) {
+
+        return new String(Base64.decode(palavra, Base64.DEFAULT));
 
     }
 

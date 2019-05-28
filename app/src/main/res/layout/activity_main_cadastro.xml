@@ -37,6 +37,21 @@
         />
 
     <EditText
+        android:id="@+id/editTurmaCad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite a sua turma"
+        android:textColor="#000000"
+        android:textStyle="italic"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        />
+
+
+    <EditText
         android:id="@+id/editEmailCad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
