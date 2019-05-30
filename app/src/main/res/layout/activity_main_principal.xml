@@ -12,13 +12,17 @@
         android:id="@+id/txtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bem vindo"
+        android:text="Bem vindo ao protótipo!"
+        android:textColor="#ffffff"
         />
 
     <TextView
         android:id="@+id/txtMensagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Carregando"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>

@@ -34,7 +34,7 @@ public class MainPrincipal extends AppCompatActivity {
 
         String nome = decrypt(nomeEncrypt);
 
-        txtNome.setText("Nome:" + nome);
+        //txtNome.setText("Nome:" + nome);
 
         VerificarMensagem(nome);
 
@@ -65,7 +65,9 @@ public class MainPrincipal extends AppCompatActivity {
                                 dataProf = result.get("DATA").getAsString();
 
                                 //colocando os valores pegados do php no txtMensagem
-                                txtMensagem.setText("Nome:" + nomeProf + " Mensagem: " + mensagemProf + " Data: " + dataProf);
+                                txtMensagem.setText("Professor: " + nomeProf + "." + System.getProperty ("line.separator")
+                                        +  mensagemProf  + System.getProperty ("line.separator")
+                                        + "Data: " + dataProf);
 
 
                             } else {
