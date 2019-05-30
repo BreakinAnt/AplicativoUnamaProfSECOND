@@ -21,6 +21,7 @@ public class MainLogin extends AppCompatActivity {
     private Button btnEntrar, btnCadastrar;
     private TextView txtCadastro;
     private String HOST = "http://bangadinhosbr2.000webhostapp.com/kinu_stuff/db/";
+    String URL = HOST + "/logar.php";
 
     public void verificaDados() {
         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
@@ -59,7 +60,7 @@ public class MainLogin extends AppCompatActivity {
             public void onClick(View v) {
                 String login = editLoginLogar.getText().toString();
                 String senha = editSenhaLogar.getText().toString();
-                String URL = HOST + "/logar.php";
+
 
                 if(login.isEmpty() || senha.isEmpty()) {
                     Toast.makeText(MainLogin.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
@@ -84,16 +85,15 @@ public class MainLogin extends AppCompatActivity {
                                             Toast.makeText(MainLogin.this, "Login ou senha incorretos", Toast.LENGTH_LONG).show();
                                         } else if(RETORNO.equals("SUCESSO")){
 
-                                            String login = result.get("LOGIN").getAsString();
-                                            String email = result.get("EMAIL").getAsString();
-
+                                            String login = result.get("LOGINUSU").getAsString();
+                                            String email = result.get("EMAILUSU").getAsString();
+                                            String nome = result.get("NOMEUSU").getAsString();
 
                                             SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
 
                                             pref.putString(encrypt("login"), encrypt(login));
                                             pref.putString(encrypt("email"), encrypt(email));
-
-
+                                            pref.putString(encrypt("nome"), encrypt(nome));
                                             pref.commit();
 
                                             Intent abrePrincipal = new Intent(MainLogin.this, MainPrincipal.class);

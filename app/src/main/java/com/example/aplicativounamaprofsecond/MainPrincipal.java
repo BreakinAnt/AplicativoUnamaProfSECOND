@@ -30,9 +30,9 @@ public class MainPrincipal extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
 
-        String nomeEncrypt = pref.getString(encrypt("login"), "");
+        String loginEncrypt = pref.getString(encrypt("login"), "");
 
-        String login = decrypt(nomeEncrypt);
+        String login = decrypt(loginEncrypt);
 
         //txtNome.setText("Nome:" + nome);
 
@@ -62,8 +62,8 @@ public class MainPrincipal extends AppCompatActivity {
                             } else if (RETORNO.equals("SUCESSO")) {
                                 //recebendo os valores do php
                                 mensagemProf = result.get("MENSAGEMPROF").getAsString();
-                                nomeProf = result.get("NOME").getAsString();
-                                dataProf = result.get("DATA").getAsString();
+                                nomeProf = result.get("NOMEPROF").getAsString();
+                                dataProf = result.get("DATAPROF").getAsString();
 
                                 //colocando os valores pegados do php no txtMensagem
                                 txtMensagem.setText("Professor: " + nomeProf + "." + System.getProperty ("line.separator")
