@@ -38,21 +38,20 @@ public class MainPrincipal extends AppCompatActivity {
 
         VerificarMensagem(nome);
 
-        //colocando os valores pegados do php no txtMensagem
-        txtMensagem.setText("Nome:" + nomeProf + " Mensagem: " + mensagemProf + " Data: " + dataProf);
-
     }
 
     public void VerificarMensagem (String nomeAlun){
         Ion.with(MainPrincipal.this)
                 .load(URL)
-                //mandando atributo nome para o php
-                .setBodyParameter("nome_app", nomeAlun)
+                //enviando os dados do APP para o PHP
+
+                .setBodyParameter("login_app", nomeAlun)
 
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+
                         try {
 
                             String RETORNO = result.get("MENSAGEM").getAsString();
@@ -61,9 +60,13 @@ public class MainPrincipal extends AppCompatActivity {
                                 Toast.makeText(MainPrincipal.this, "Erro", Toast.LENGTH_LONG).show();
                             } else if (RETORNO.equals("SUCESSO")) {
                                 //recebendo os valores do php
-                                mensagemProf = result.get("MENSAGEM").getAsString();
+                                mensagemProf = result.get("MENSAGEMPROF").getAsString();
                                 nomeProf = result.get("NOME").getAsString();
                                 dataProf = result.get("DATA").getAsString();
+
+                                //colocando os valores pegados do php no txtMensagem
+                                txtMensagem.setText("Nome:" + nomeProf + " Mensagem: " + mensagemProf + " Data: " + dataProf);
+
 
                             } else {
                                 Toast.makeText(MainPrincipal.this, "Ocorreu um erro, tente novamente mais tarde", Toast.LENGTH_LONG).show();

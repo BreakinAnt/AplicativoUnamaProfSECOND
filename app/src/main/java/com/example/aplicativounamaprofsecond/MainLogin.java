@@ -49,72 +49,72 @@ public class MainLogin extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent abreCad = new Intent(MainLogin.this, MainCadastro.class);
-               startActivity(abreCad);
+                Intent abreCad = new Intent(MainLogin.this, MainCadastro.class);
+                startActivity(abreCad);
             }
         });
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  String login = editLoginLogar.getText().toString();
-                  String senha = editSenhaLogar.getText().toString();
-                  String URL = HOST + "/logar.php";
+                String login = editLoginLogar.getText().toString();
+                String senha = editSenhaLogar.getText().toString();
+                String URL = HOST + "/logar.php";
 
                 if(login.isEmpty() || senha.isEmpty()) {
                     Toast.makeText(MainLogin.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
                 } else {
-                Ion.with(MainLogin.this)
-                        .load(URL)
-                        //enviando os dados do APP para o PHP
+                    Ion.with(MainLogin.this)
+                            .load(URL)
+                            //enviando os dados do APP para o PHP
 
-                        .setBodyParameter("login_app", login)
-                        .setBodyParameter("senha_app", senha)
+                            .setBodyParameter("login_app", login)
+                            .setBodyParameter("senha_app", senha)
 
-                        .asJsonObject()
-                        .setCallback(new FutureCallback<JsonObject>() {
-                            @Override
-                            public void onCompleted(Exception e, JsonObject result) {
+                            .asJsonObject()
+                            .setCallback(new FutureCallback<JsonObject>() {
+                                @Override
+                                public void onCompleted(Exception e, JsonObject result) {
 
-                                try {
+                                    try {
 
-                                    String RETORNO = result.get("LOGIN").getAsString();
+                                        String RETORNO = result.get("LOGIN").getAsString();
 
-                                    if(RETORNO.equals("ERRO")) {
-                                        Toast.makeText(MainLogin.this, "Login ou senha incorretos", Toast.LENGTH_LONG).show();
-                                    } else if(RETORNO.equals("SUCESSO")){
+                                        if(RETORNO.equals("ERRO")) {
+                                            Toast.makeText(MainLogin.this, "Login ou senha incorretos", Toast.LENGTH_LONG).show();
+                                        } else if(RETORNO.equals("SUCESSO")){
 
-                                        String nome = result.get("NOME").getAsString();
-                                        String email = result.get("EMAIL").getAsString();
-
-
-                                        SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
-
-                                        pref.putString(encrypt("nome"), encrypt(nome));
-                                        pref.putString(encrypt("email"), encrypt(email));
+                                            String nome = result.get("NOME").getAsString();
+                                            String email = result.get("EMAIL").getAsString();
 
 
-                                        pref.commit();
+                                            SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
 
-                                        Intent abrePrincipal = new Intent(MainLogin.this, MainPrincipal.class);
-                                        startActivity(abrePrincipal);
+                                            pref.putString(encrypt("nome"), encrypt(nome));
+                                            pref.putString(encrypt("email"), encrypt(email));
 
-                                    } else {
-                                        Toast.makeText(MainLogin.this, "Ocorreu um erro, tente novamente mais tarde", Toast.LENGTH_LONG).show();
+
+                                            pref.commit();
+
+                                            Intent abrePrincipal = new Intent(MainLogin.this, MainPrincipal.class);
+                                            startActivity(abrePrincipal);
+
+                                        } else {
+                                            Toast.makeText(MainLogin.this, "Ocorreu um erro, tente novamente mais tarde", Toast.LENGTH_LONG).show();
+                                        }
+
+                                    } catch (Exception erro) {
+                                        Toast.makeText(MainLogin.this, "Erro: " + erro, Toast.LENGTH_LONG).show();
                                     }
 
-                                } catch (Exception erro) {
-                                    Toast.makeText(MainLogin.this, "Erro: " + erro, Toast.LENGTH_LONG).show();
                                 }
+                            });
 
-                            }
-                        });
+                }
+
 
             }
-
-
-    }
-});
+        });
 
 
     }
