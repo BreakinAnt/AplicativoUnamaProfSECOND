@@ -30,22 +30,22 @@ public class MainPrincipal extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
 
-        String nomeEncrypt = pref.getString(encrypt("nome"), "");
+        String nomeEncrypt = pref.getString(encrypt("login"), "");
 
-        String nome = decrypt(nomeEncrypt);
+        String login = decrypt(nomeEncrypt);
 
         //txtNome.setText("Nome:" + nome);
 
-        VerificarMensagem(nome);
+        VerificarMensagem(login);
 
     }
 
-    public void VerificarMensagem (String nomeAlun){
+    public void VerificarMensagem (String loginVerificacao){
         Ion.with(MainPrincipal.this)
                 .load(URL)
                 //enviando os dados do APP para o PHP
 
-                .setBodyParameter("login_app", nomeAlun)
+                .setBodyParameter("login_app", loginVerificacao)
 
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
@@ -57,7 +57,8 @@ public class MainPrincipal extends AppCompatActivity {
                             String RETORNO = result.get("MENSAGEM").getAsString();
 
                             if (RETORNO.equals("ERRO")) {
-                                Toast.makeText(MainPrincipal.this, "Erro", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainPrincipal.this, "Nenhuma mensagem encontrada", Toast.LENGTH_LONG).show();
+                                txtMensagem.setText("...");
                             } else if (RETORNO.equals("SUCESSO")) {
                                 //recebendo os valores do php
                                 mensagemProf = result.get("MENSAGEMPROF").getAsString();

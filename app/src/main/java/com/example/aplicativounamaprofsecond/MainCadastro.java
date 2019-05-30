@@ -49,7 +49,7 @@ public class MainCadastro extends AppCompatActivity {
                 if(confirma.equals(senha)) {
 
                   if(nome.isEmpty() || login.isEmpty() || turma.isEmpty() || email.isEmpty() || senha.isEmpty() ) {
-                      Toast.makeText(MainCadastro.this, "Todos os campos são obrigatorios", Toast.LENGTH_LONG).show();
+                      Toast.makeText(MainCadastro.this, "Todos os campos são obrigatorios!", Toast.LENGTH_LONG).show();
                   } else {
                       Ion.with(MainCadastro.this)
                               .load(URL)
@@ -58,7 +58,7 @@ public class MainCadastro extends AppCompatActivity {
                               .setBodyParameter("login_app", login)
                               .setBodyParameter("email_app", email)
                               .setBodyParameter("senha_app", senha)
-                              .setBodyParameter("turma_app", senha)
+                              .setBodyParameter("turma_app", turma)
 
                               .asJsonObject()
                               .setCallback(new FutureCallback<JsonObject>() {

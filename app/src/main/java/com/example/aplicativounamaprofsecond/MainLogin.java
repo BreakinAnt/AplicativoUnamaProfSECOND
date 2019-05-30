@@ -84,13 +84,13 @@ public class MainLogin extends AppCompatActivity {
                                             Toast.makeText(MainLogin.this, "Login ou senha incorretos", Toast.LENGTH_LONG).show();
                                         } else if(RETORNO.equals("SUCESSO")){
 
-                                            String nome = result.get("NOME").getAsString();
+                                            String login = result.get("LOGIN").getAsString();
                                             String email = result.get("EMAIL").getAsString();
 
 
                                             SharedPreferences.Editor pref = getSharedPreferences("info", MODE_PRIVATE).edit();
 
-                                            pref.putString(encrypt("nome"), encrypt(nome));
+                                            pref.putString(encrypt("login"), encrypt(login));
                                             pref.putString(encrypt("email"), encrypt(email));
 
 
