@@ -40,6 +40,16 @@ public class MainPrincipal extends AppCompatActivity {
 
     }
 
+    protected void onResume () {
+        super.onResume();
+        SharedPreferences pref = getSharedPreferences("info", MODE_PRIVATE);
+
+        String loginEncrypt = pref.getString(encrypt("login"), "");
+
+        String login = decrypt(loginEncrypt);
+        VerificarMensagem(login);
+    }
+
     public void VerificarMensagem (String loginVerificacao){
         Ion.with(MainPrincipal.this)
                 .load(URL)
