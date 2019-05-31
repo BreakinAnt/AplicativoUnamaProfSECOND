@@ -9,7 +9,7 @@ public class ApplicationClass extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // OneSignal Initialization
+        // OneSignal Initialization/
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
